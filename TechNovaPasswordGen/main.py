@@ -1,3 +1,4 @@
+
 import random
 import os
 
@@ -31,6 +32,16 @@ def password(length):
     return password
 
 if __name__ == '__main__':
-    length = int(input("Enter the desired password length: "))
+    raw = input("Enter the desired password length (or press Enter for random): ").strip()
+
+    if not raw:                      # user pressed Enter → empty string
+        length = random.randint(8, 16)
+    else:
+        try:
+            length = int(raw)
+        except ValueError:
+            print("Invalid input. Please enter a valid integer.")
+            raise SystemExit(1)
+
     generated_password = password(length)
     print(f"Generated Password: {generated_password}")
